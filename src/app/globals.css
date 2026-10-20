@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #2b3346;
+  --color-navy-deep: #232a3b;
+  --color-ivory: #faf8f3;
+  --color-tint: #f1f3f6;
+  --color-gold: #c9a86a;
+  /* 로고 골드를 진하게 한 포인트 색 (흰 바탕 큰 글자용) */
+  --color-accent: #9a7636;
+  --color-ink: #2f343f;
+  --color-muted: #686d78;
+  /* 본문 글자색 */
+  --color-body: #3a3f4b;
+  --color-kakao: #fee500;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+@layer components {
+  /* 콘텐츠 최대 폭 1120px */
+  /* 모든 섹션 공통 폭: 콘텐츠 최대 1080px, 좌우 여백 모바일 20px / PC 32px */
+  .wrap {
+    width: 100%;
+    max-width: calc(1080px + 2.5rem);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 1024px) {
+    .wrap { max-width: calc(1080px + 4rem); padding-inline: 2rem; }
+  }
+  /* 섹션 위아래 여백: 모바일 80px, PC 120px */
+  .section {
+    padding-block: 3.5rem;
+  }
+  @media (min-width: 1024px) {
+    .section { padding-block: 5.5rem; }
+  }
+
+  /* 글자 크기 5단계: 섹션 제목 / 소제목 / 본문 / 보조 / 라벨
+     굵기는 400 / 500 / 600 (첫 화면 제목만 700) */
+  .t-title {
+    font-weight: 600;
+    font-size: clamp(1.625rem, 1.3rem + 1.1vw, 2.25rem);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .t-sub {
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .t-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-body);
+  }
+  @media (min-width: 1024px) {
+    .t-sub { font-size: 1.25rem; }
+    .t-body { font-size: 1.0625rem; }
+  }
+  .t-small {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .t-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  /* 섹션 사이 큰 문장: 500, 모바일 28~32px / PC 44~56px */
+  .t-statement {
+    font-weight: 500;
+    font-size: clamp(1.75rem, 0.9rem + 2.9vw, 3.25rem);
+    line-height: 1.45;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  /* 자주 묻는 질문: 기본 details 화살표 대신 +/− */
+  .faq summary { list-style: none; cursor: pointer; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; flex: none; font-weight: 400; color: var(--color-muted); }
+  .faq[open] summary::after { content: "−"; }
+}
+
+/* 스크롤 시 살짝 페이드인. JS가 준비됐을 때만 숨김 처리 */
+.reveal-ready [data-reveal] {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-ready [data-reveal]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(10px);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal-ready [data-reveal] { transition: none; opacity: 1; transform: none; }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+}

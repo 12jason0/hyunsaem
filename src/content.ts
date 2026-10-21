@@ -11,7 +11,7 @@ export const site = {
 };
 
 export const nav = [
-  { label: "선생님", href: "#teacher" },
+  { label: "원장님 소개", href: "#teacher" },
   { label: "수업 시간", href: "#schedule" },
   { label: "영어", href: "#english" },
   { label: "수학", href: "#math" },

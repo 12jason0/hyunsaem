@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import HeroPhoto from "@/components/HeroPhoto";
 import Reveal from "@/components/Reveal";
 import Tabs from "@/components/Tabs";
-import { admissions, care, coaching, consult, english, englishSpecial, faq, feedbackSamples, footer, hero, math, photos, site, statements, teacher, timetable, type Course } from "@/content";
+import { admissions, care, coaching, consult, english, englishPrograms, englishSpecial, faq, feedbackSamples, footer, hero, math, photos, site, statements, teacher, timetable, type Course } from "@/content";
 
 const btn = "inline-flex h-14 items-center justify-center rounded-md px-8 text-base font-semibold transition-colors";
 const grades = ["초등부", "중등부", "고등부"];
@@ -27,6 +27,38 @@ function Head({ title, sub }: { title: string; sub?: string }) {
     <div data-reveal className="mx-auto mb-8 max-w-2xl text-center lg:mb-12">
       <h2 className="t-title text-navy">{title}</h2>
       {sub && <p className="t-body mt-4">{sub}</p>}
+    </div>
+  );
+}
+
+type Box = { label: string; title: string; items: (string | { name: string; desc: string })[]; note: string; cta: string };
+
+function SpecialBox({ box }: { box: Box }) {
+  if (box.items.length === 0) return null;
+  return (
+    <div data-reveal className="mt-12 rounded-md border border-gold bg-ivory px-6 py-7 lg:mt-16 lg:flex lg:items-center lg:gap-10 lg:px-10 lg:py-9">
+      <div className="lg:flex-1">
+        <p className="t-label text-muted">{box.label}</p>
+        <h3 className="t-sub mt-1.5 text-navy">{box.title}</h3>
+        <ol className="mt-5 divide-y divide-navy/10 lg:grid lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
+          {box.items.map((item, i) => {
+            const name = typeof item === "string" ? item : item.name;
+            return (
+              <li key={name} className="flex gap-3 py-3.5 first:pt-0 last:pb-0 lg:px-6 lg:py-0 lg:first:pl-0 lg:last:pr-0">
+                <span className="t-small font-semibold text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="t-body block font-medium text-balance text-navy">{name}</span>
+                  {typeof item !== "string" && <span className="t-small mt-1 block text-muted">{item.desc}</span>}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+        {box.note && <p className="t-small mt-6 text-muted">{box.note}</p>}
+      </div>
+      <a href="#consult-form" className="t-small mt-6 inline-block shrink-0 font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy lg:mt-0">
+        {box.cta} →
+      </a>
     </div>
   );
 }
@@ -149,10 +181,30 @@ export default function Home() {
                   {teacher.role} {teacher.name}
                 </p>
 
-                <div className="t-body mt-4 space-y-3 rounded-lg border-l-[3px] border-accent bg-white px-6 py-5 text-navy">
-                  {[...(teacher.quote ? [`“${teacher.quote}”`] : []), ...teacher.body].map((p) => (
-                    <p key={p}>{p}</p>
-                  ))}
+                <div className="mt-4 rounded-lg border-l-[3px] border-accent bg-white px-6 py-6 sm:px-8 sm:py-7">
+                  {teacher.quote && <p className="t-body mb-4 text-navy">“{teacher.quote}”</p>}
+                  <p className="t-sub text-navy">{teacher.intro}</p>
+                  <div className="mt-6 divide-y divide-gold/30 border-t border-gold/30">
+                    {teacher.body.map(({ label, strong, text }) => {
+                      const [before, ...rest] = text.split(strong);
+                      return (
+                        <div key={label} className="py-6 last:pb-0">
+                          <p className="t-label text-accent">{label}</p>
+                          <p className="t-body mt-2 leading-[1.85] break-keep">
+                            {rest.length ? (
+                              <>
+                                {before}
+                                <strong className="font-semibold text-navy">{strong}</strong>
+                                {rest.join(strong)}
+                              </>
+                            ) : (
+                              text
+                            )}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {teacher.careers.length > 0 && (
@@ -253,27 +305,9 @@ export default function Home() {
               <Tabs label="영어 수업 학년" tabs={english.map((c) => ({ id: c.id, label: c.tab, content: <CoursePanel c={c} /> }))} />
             </div>
 
-            {/* 특별 과정: 탭과 상관없이 항상 표시 */}
-            {englishSpecial.items.length > 0 && (
-              <div data-reveal className="mt-12 rounded-md border border-gold bg-ivory px-6 py-7 lg:mt-16 lg:flex lg:items-center lg:gap-10 lg:px-10 lg:py-9">
-                <div className="lg:flex-1">
-                  <p className="t-label text-muted">{englishSpecial.label}</p>
-                  <h3 className="t-sub mt-1.5 text-navy">{englishSpecial.title}</h3>
-                  <ol className="mt-5 divide-y divide-navy/10 lg:grid lg:grid-cols-3 lg:divide-x lg:divide-y-0">
-                    {englishSpecial.items.map((item, i) => (
-                      <li key={item} className="flex gap-3 py-3.5 first:pt-0 last:pb-0 lg:px-6 lg:py-0 lg:first:pl-0 lg:last:pr-0">
-                        <span className="t-small font-semibold text-accent">{String(i + 1).padStart(2, "0")}</span>
-                        <span className="t-body font-medium text-balance text-navy">{item}</span>
-                      </li>
-                    ))}
-                  </ol>
-                  <p className="t-small mt-6 text-muted">{englishSpecial.note}</p>
-                </div>
-                <a href="#consult-form" className="t-small mt-6 inline-block shrink-0 font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy lg:mt-0">
-                  {englishSpecial.cta} →
-                </a>
-              </div>
-            )}
+            {/* 특별 과정·영어 프로그램: 탭과 상관없이 항상 표시 */}
+            <SpecialBox box={englishSpecial} />
+            <SpecialBox box={englishPrograms} />
           </div>
         </section>
 

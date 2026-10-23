@@ -283,7 +283,7 @@ export const footer = {
   location: "위치: 한뜰마을 2단지 (상세 주소는 상담 시 안내)",
   // 비워둔 항목은 표시되지 않습니다.
   businessName: "현샘영수",
-  owner: "",
+  owner: "박지현",
   bizNo: "315-90-23906", // 사업자등록번호
   registrationNo: "제4490호", // 개인과외교습자 신고번호
 };

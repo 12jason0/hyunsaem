@@ -303,11 +303,26 @@ export default function Home() {
           <div className="wrap section">
             <Head title="영어 수업" />
             <div data-reveal>
-              <Tabs label="영어 수업 학년" tabs={english.map((c) => ({ id: c.id, label: c.tab, content: <CoursePanel c={c} /> }))} />
+              {/* 특별 과정: 학년 탭마다 다른 내용 */}
+              <Tabs
+                label="영어 수업 학년"
+                tabs={english.map((c) => {
+                  const special = englishSpecial.byTab[c.tab];
+                  return {
+                    id: c.id,
+                    label: c.tab,
+                    content: (
+                      <>
+                        <CoursePanel c={c} />
+                        {special && <SpecialBox box={{ ...englishSpecial, ...special }} />}
+                      </>
+                    ),
+                  };
+                })}
+              />
             </div>
 
-            {/* 특별 과정·영어 프로그램: 탭과 상관없이 항상 표시 */}
-            <SpecialBox box={englishSpecial} />
+            {/* 영어 프로그램: 탭과 상관없이 항상 표시 */}
             <SpecialBox box={englishPrograms} />
           </div>
         </section>

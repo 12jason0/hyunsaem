@@ -7,7 +7,7 @@ export const site = {
   description:
     "현샘영수 공부방. 초등·중등 영어·수학, 고등 영어, 수행평가·탐구 코칭. 학생별 맞춤 지도와 매 수업 후 학부모 피드백으로 기초부터 내신까지 꼼꼼하게 관리합니다.",
   // 카카오톡 채널 주소로 바꿔주세요.
-  kakaoUrl: "https://pf.kakao.com/_XXXX",
+  kakaoUrl: "http://pf.kakao.com/_DjYmX/chat",
 };
 
 export const nav = [
@@ -293,7 +293,7 @@ export const faq = [
 export const footer = {
   // 맨 아래 저작권 문구 (연도는 자동)
   copyright: "현샘영수 HS English & Math. All rights reserved.",
-  location: "위치: 한뜰마을 2단지 (상세 주소는 상담 시 안내)",
+  location: "위치: 한뜰마을 3단지 (상세 주소는 상담 시 안내)",
   // 비워둔 항목은 표시되지 않습니다.
   businessName: "현샘영수",
   owner: "박지현",

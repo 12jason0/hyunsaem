@@ -42,7 +42,7 @@ TELEGRAM_CHAT_ID=123456789
 
 | 항목 | 위치 |
 |---|---|
-| 카카오톡 채널 주소 | `site.kakaoUrl` (지금은 `https://pf.kakao.com/_XXXX` 임시값) |
+| 카카오톡 채널 주소 | `site.kakaoUrl` (`http://pf.kakao.com/_DjYmX/chat`) |
 | 메인 문구 | `hero` |
 | 메인 사진 | `hero.photo` — 지금은 Unsplash 임시 사진. 원장님 사진을 `public/hero.jpg` 로 넣고 `photo: "/hero.jpg"`, `photoAlt` 도 함께 수정 |
 | 메인 사진 위 배지 | `hero.badge` |

@@ -282,7 +282,8 @@ export const footer = {
   copyright: "현샘영수 HS English & Math. All rights reserved.",
   location: "위치: 한뜰마을 2단지 (상세 주소는 상담 시 안내)",
   // 비워둔 항목은 표시되지 않습니다.
-  businessName: "",
+  businessName: "현샘영수",
   owner: "",
-  registrationNo: "", // 교습자 신고번호
+  bizNo: "315-90-23906", // 사업자등록번호
+  registrationNo: "제4490호", // 개인과외교습자 신고번호
 };

@@ -100,7 +100,8 @@ export default function Home() {
   const footerInfo = [
     footer.businessName && `상호: ${footer.businessName}`,
     footer.owner && `대표자: ${footer.owner}`,
-    footer.registrationNo && `교습자 신고번호: ${footer.registrationNo}`,
+    footer.bizNo && `사업자등록번호: ${footer.bizNo}`,
+    footer.registrationNo && `개인과외교습자 신고번호: ${footer.registrationNo}`,
   ].filter(Boolean) as string[];
 
   return (

@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import HeroPhoto from "@/components/HeroPhoto";
 import Reveal from "@/components/Reveal";
 import Tabs from "@/components/Tabs";
-import { admissions, care, coaching, consult, english, englishPrograms, englishSpecial, faq, feedbackSamples, footer, hero, math, photos, site, statements, teacher, timetable, type Course } from "@/content";
+import { admissions, care, coaching, consult, english, englishPrograms, englishSpecial, faq, feedbackSamples, fees, footer, hero, math, photos, site, statements, teacher, timetable, type Course } from "@/content";
 
 const btn = "inline-flex h-14 items-center justify-center rounded-md px-8 text-base font-semibold transition-colors";
 const grades = ["초등부", "중등부", "고등부"];
@@ -294,6 +294,42 @@ export default function Home() {
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            {/* 교습비 */}
+            <div data-reveal className="mt-14">
+              <h3 className="t-label mb-4 font-semibold text-navy">{fees.title}</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[20rem] text-left text-[0.9rem] sm:text-base">
+                  <thead className="t-label text-muted">
+                    <tr className="border-b border-navy/15">
+                      <th scope="col" className="w-[30%] pb-3 pr-2 font-medium">과목</th>
+                      <th scope="col" className="pb-3 pr-2 font-medium">학년</th>
+                      <th scope="col" className="pb-3 pr-2 font-medium">수업</th>
+                      <th scope="col" className="pb-3 text-right font-medium">월 교습비</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {fees.rows.map((r, i) => {
+                      const first = i === 0 || fees.rows[i - 1].subject !== r.subject;
+                      const span = first ? fees.rows.slice(i).findIndex((x) => x.subject !== r.subject) : 0;
+                      return (
+                        <tr key={i} className="border-b border-navy/10">
+                          {first && (
+                            <th scope="rowgroup" rowSpan={span === -1 ? fees.rows.length - i : span} className="border-r border-navy/10 py-3 pr-2 align-top font-semibold text-navy [word-break:keep-all]">
+                              {r.subject}
+                            </th>
+                          )}
+                          <td className="whitespace-nowrap py-3 pl-2 pr-2 sm:pl-4">{r.grade}</td>
+                          <td className="py-3 pr-2 [word-break:keep-all]">{r.lesson}</td>
+                          <td className="whitespace-nowrap py-3 text-right font-semibold text-navy">{r.fee}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-3 text-xs text-muted sm:text-sm">{fees.note}</p>
             </div>
           </div>
         </section>
